@@ -1,0 +1,35 @@
+{
+  "name": "smartcontracts",
+  "version": "1.0.0",
+  "description": "\"# SmartContracts\"",
+  "main": "hardhat.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "npx hardhat compile && npx hardhat run scripts/compile.js --network localhost"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legit-ecosystem/SmartContracts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/legit-ecosystem/SmartContracts/issues"
+  },
+  "homepage": "https://github.com/legit-ecosystem/SmartContracts#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.2.0",
+    "ethereum-waffle": "^3.1.1",
+    "ethers": "^5.0.0",
+    "hardhat": "^2.10.2",
+    "husky": "^4.2.5"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.6.0",
+    "@openzeppelin/contracts-upgradeable": "^4.6.0",
+    "@openzeppelin/hardhat-upgrades": "^1.19.0",
+    "mysql": "^2.18.1"
+  }
+}
