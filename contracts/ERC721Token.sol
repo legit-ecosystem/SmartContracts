@@ -53,6 +53,12 @@ contract ERC721Token is ERC2771Context, Ownable, ERC721URIStorage, AccessControl
     /// @dev Mapping from tokenId => price of each NFT.
     mapping(uint256 => uint256) public price;
 
+    struct MarketItem {
+      uint256 tokenId;
+      address owner;
+      uint256 price;
+    }
+
     /*///////////////////////////////////////////////////////////////
                     Constructor + initializer logic
     //////////////////////////////////////////////////////////////*/
@@ -136,6 +142,30 @@ contract ERC721Token is ERC2771Context, Ownable, ERC721URIStorage, AccessControl
         }
     }
 
+    function fetchAllNFTs() public view returns (MarketItem[] memory) {
+      uint totalItemCount = _tokenIds.current();
+      uint itemCount = 0;
+
+      for (uint i = 0; i < totalItemCount; i++) {
+        if (_exists(i)) {
+          itemCount += 1;
+        }
+      }
+
+      MarketItem[] memory items = new MarketItem[](itemCount);
+      itemCount = 0;
+      for (uint i = 0; i < totalItemCount; i++) {
+        if (_exists(i)) {
+          itemCount += 1;
+          items[itemCount] = MarketItem(
+            i,
+            ownerOf(i),
+            price[i]
+          );
+        }
+      }
+      return items;
+    }
     
     function _msgSender() internal view override(Context, ERC2771Context) returns (address sender) {
       sender = ERC2771Context._msgSender();
