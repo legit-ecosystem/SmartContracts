@@ -1,6 +1,6 @@
 async function main() {
   const fs = require("fs");
-  const contractsDir = __dirname + "/../ethereum/EVM/erc20";
+  const contractsDir = __dirname + "/../ethereum/EVM";
 
   if (!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir);
