@@ -146,22 +146,22 @@ contract ERC721Token is ERC2771Context, Ownable, ERC721URIStorage, AccessControl
       uint totalItemCount = _tokenIds.current();
       uint itemCount = 0;
 
-      for (uint i = 0; i < totalItemCount; i++) {
-        if (_exists(i)) {
+      for (uint tokenId = 1; tokenId <= totalItemCount; tokenId++) {
+        if (_exists(tokenId)) {
           itemCount += 1;
         }
       }
 
       MarketItem[] memory items = new MarketItem[](itemCount);
       itemCount = 0;
-      for (uint i = 0; i < totalItemCount; i++) {
-        if (_exists(i)) {
-          itemCount += 1;
+      for (uint tokenId = 1; tokenId <= totalItemCount; tokenId++) {
+        if (_exists(tokenId)) {
           items[itemCount] = MarketItem(
-            i,
-            ownerOf(i),
-            price[i]
+            tokenId,
+            ownerOf(tokenId),
+            price[tokenId]
           );
+          itemCount += 1;
         }
       }
       return items;
