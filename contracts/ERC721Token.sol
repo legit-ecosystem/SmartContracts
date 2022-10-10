@@ -35,21 +35,6 @@ contract ERC721Token is ERC2771Context, Ownable, ERC721URIStorage, AccessControl
                                 Mappings
     //////////////////////////////////////////////////////////////*/
 
-    /**
-     *  @dev Mapping from 'Largest tokenId of a batch of tokens with the same baseURI'
-     *       to base URI for the respective batch of tokens.
-     **/
-    mapping(uint256 => string) private baseURI;
-
-    /**
-     *  @dev Mapping from 'Largest tokenId of a batch of 'delayed-reveal' tokens with
-     *       the same baseURI' to encrypted base URI for the respective batch of tokens.
-     **/
-    mapping(uint256 => bytes) public encryptedData;
-
-    /// @dev Mapping from address => total number of NFTs a wallet has claimed.
-    mapping(address => uint256) public walletClaimCount;
-
     /// @dev Mapping from tokenId => price of each NFT.
     mapping(uint256 => uint256) public price;
 
@@ -109,7 +94,7 @@ contract ERC721Token is ERC2771Context, Ownable, ERC721URIStorage, AccessControl
     }
 
     function transferNFTFrom(uint256 _id, address from, address to) external payable onlyRole(TRANSFER_ROLE) {
-      super.transferFrom(from, to, _id);
+      safeTransferFrom(from, to, _id);
     }
 
     function setOwner(address _newOwner) external onlyRole(DEFAULT_ADMIN_ROLE) {
